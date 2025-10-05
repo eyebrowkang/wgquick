@@ -145,7 +145,8 @@ a:hover {
   backdrop-filter: blur(6px);
 }
 
-.hero-highlights h3 {
+.hero-highlights h2,
+.hero-highlight-title {
   font-size: 0.95rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;

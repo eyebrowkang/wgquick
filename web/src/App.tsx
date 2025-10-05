@@ -35,11 +35,11 @@ function App() {
               <p className="hero-subtitle">{bundle.hero.subheadline}</p>
               <ul className="hero-highlights">
                 <li>
-                  <h3>{bundle.features.security.title}</h3>
+                  <h2 className="hero-highlight-title">{bundle.features.security.title}</h2>
                   <p>{bundle.features.security.description}</p>
                 </li>
                 <li>
-                  <h3>{bundle.features.convenience.title}</h3>
+                  <h2 className="hero-highlight-title">{bundle.features.convenience.title}</h2>
                   <p>{bundle.features.convenience.description}</p>
                 </li>
               </ul>
