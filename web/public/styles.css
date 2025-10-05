@@ -61,8 +61,8 @@ a:hover {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
+  gap: 16px;
+  flex-wrap: nowrap;
 }
 
 .branding {
@@ -475,6 +475,7 @@ a:hover {
   gap: 12px;
   font-size: 0.78rem;
   color: var(--text-secondary);
+  margin-left: auto;
 }
 
 .language-toggle .options {
@@ -552,7 +553,7 @@ a:hover {
   }
 
   .branding {
-    font-size: 2rem;
+    font-size: 1.82rem;
   }
 
   .pill-row {
@@ -600,6 +601,20 @@ a:hover {
 
   .copy-row .button {
     width: 100%;
+  }
+
+  .language-toggle {
+    font-size: 0.72rem;
+    gap: 8px;
+  }
+
+  .language-toggle .options {
+    border-width: 1px;
+  }
+
+  .language-toggle button {
+    padding: 6px 12px;
+    letter-spacing: 0.12em;
   }
 
   .features {
