@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.1.0 - 2025-10-05
+- Integrated optional Google Analytics via build-time HTML injection with CSP hashing, keeping deployments configurable via `VITE_GA_MEASUREMENT_ID`.
+- Hardened deterministic Go → WASM builds by disabling VCS metadata and seeding rand deterministically.
+- Added sitemap support and fine-tuned CSP/headings for PageSpeed Insights.
+
 ## v1.0.1 - 2025-10-05
 - Added sitemap.xml and wired robots.txt for improved SEO tooling compatibility.
 - Made Go → WASM builds deterministic by stripping build IDs and trimming paths.
