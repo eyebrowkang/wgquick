@@ -22,7 +22,7 @@ A bilingual (English/简体中文) landing and utility site for wgquick.com that
 2. **Build the Go → WASM binary (reproducible output)**
    ```bash
    make wasm
-   # or: GOOS=js GOARCH=wasm go build -trimpath -ldflags="-buildid=" -o web/public/main.wasm ./cmd/wasm
+   # or: GODEBUG=randautoseed=0 GOOS=js GOARCH=wasm go build -trimpath -buildvcs=false -ldflags="-buildid=" -o web/public/main.wasm ./cmd/wasm
    ```
 3. **Run the development server**
    ```bash
@@ -37,12 +37,13 @@ make build
 # outputs to web/dist with main.wasm + wasm_exec.js alongside the bundle
 ```
 
-The combination of `-trimpath` and `-ldflags="-buildid="` removes build metadata so identical sources produce identical `main.wasm` binaries.
+The combination of `GODEBUG=randautoseed=0`, `-trimpath`, `-buildvcs=false`, and `-ldflags="-buildid="` removes non-deterministic metadata so identical sources produce identical `main.wasm` binaries.
 
 ### Analytics configuration
 - Copy `web/.env.example` to `web/.env.local` (or set the variable in your deployment environment).
 - Set `VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX` to enable Google Analytics; leave it empty to disable analytics for private deployments.
 - When using the provided GitHub Actions workflow, create the `VITE_GA_MEASUREMENT_ID` repository secret so Cloudflare Pages builds include analytics.
+  - If you need reproducible artifacts outside the workflow, remember to set `GODEBUG=randautoseed=0` when running `go build`.
 
 Deploy the contents of `web/dist` at https://wgquick.com/. The dist folder already includes `main.wasm` and `wasm_exec.js` under the same CSP rules.
 

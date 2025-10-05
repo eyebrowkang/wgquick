@@ -14,6 +14,7 @@ jobs:
       deployments: write
     env:
       VITE_GA_MEASUREMENT_ID: ${{ secrets.VITE_GA_MEASUREMENT_ID }}
+      GODEBUG: randautoseed=0
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,7 +40,7 @@ jobs:
         run: pnpm install --dir web --frozen-lockfile
 
       - name: Build Go WebAssembly module
-        run: GOOS=js GOARCH=wasm go build -trimpath -ldflags="-buildid=" -o web/public/main.wasm ./cmd/wasm
+        run: GOOS=js GOARCH=wasm go build -trimpath -buildvcs=false -ldflags="-buildid=" -o web/public/main.wasm ./cmd/wasm
 
       - name: Lint frontend
         run: pnpm --dir web run lint

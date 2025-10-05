@@ -1,9 +1,10 @@
 .PHONY: wasm dev build clean
 
-WASM_FLAGS := -trimpath -ldflags="-buildid="
+WASM_ENV := GOOS=js GOARCH=wasm GODEBUG=randautoseed=0
+WASM_FLAGS := -trimpath -buildvcs=false -ldflags="-buildid="
 
 wasm:
-	GOOS=js GOARCH=wasm go build $(WASM_FLAGS) -o web/public/main.wasm ./cmd/wasm
+	$(WASM_ENV) go build $(WASM_FLAGS) -o web/public/main.wasm ./cmd/wasm
 
 dev: wasm
 	pnpm --dir web dev
