@@ -12,6 +12,7 @@ A bilingual (English/简体中文) landing and utility site for wgquick.com that
 - Derive a public key from a user-supplied private key
 - Zero server interaction, reinforced by an explicit Content Security Policy (`default-src 'self'` with WebAssembly support)
 - Marketing copy emphasises *security* and *convenience* in English and Chinese, auto-detected on first visit and stored in `localStorage`
+- Optional Google Analytics integration controlled via `VITE_GA_MEASUREMENT_ID`
 
 ## Getting started
 1. **Install dependencies**
@@ -37,6 +38,11 @@ make build
 ```
 
 The combination of `-trimpath` and `-ldflags="-buildid="` removes build metadata so identical sources produce identical `main.wasm` binaries.
+
+### Analytics configuration
+- Copy `web/.env.example` to `web/.env.local` (or set the variable in your deployment environment).
+- Set `VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX` to enable Google Analytics; leave it empty to disable analytics for private deployments.
+- When using the provided GitHub Actions workflow, create the `VITE_GA_MEASUREMENT_ID` repository secret so Cloudflare Pages builds include analytics.
 
 Deploy the contents of `web/dist` at https://wgquick.com/. The dist folder already includes `main.wasm` and `wasm_exec.js` under the same CSP rules.
 
