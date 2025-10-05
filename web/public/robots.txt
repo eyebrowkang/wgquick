@@ -2,5 +2,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://wgquick.com/sitemap.xml
-
-Sitemap: https://wgquick.com/sitemap.xml
