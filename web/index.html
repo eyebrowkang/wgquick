@@ -8,9 +8,24 @@
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'none';"
     />
-    <meta name="description" content="wgquick.com — secure, local-first WireGuard key generation in your browser." />
-    <title>wgquick.com</title>
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta
+      name="description"
+      content="wgquick.com is a secure, open-source WireGuard key generator that runs 100% in your browser with Go WebAssembly — no CLI, no servers, just instant keys."
+    />
+    <meta name="keywords" content="WireGuard key generator, secure WebAssembly, browser WireGuard keys, wgquick" />
+    <meta property="og:title" content="wgquick • Secure Browser WireGuard Key Generator" />
+    <meta
+      property="og:description"
+      content="Generate WireGuard key pairs safely in your browser. Go WASM, open-source, and faster than the command line."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://wgquick.com" />
+    <title>wgquick • Secure Browser WireGuard Key Generator</title>
+    <meta name="theme-color" content="#05080f" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     <link rel="preload" href="/wasm_exec.js" as="script" />
     <link rel="preload" href="/main.wasm" as="fetch" type="application/wasm" crossorigin="anonymous" />
     <link rel="stylesheet" href="/styles.css" />

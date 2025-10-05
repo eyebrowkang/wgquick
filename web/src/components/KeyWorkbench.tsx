@@ -124,7 +124,7 @@ export function KeyWorkbench() {
           </button>
           <label className="label">
             <span>{bundle.labels.privateKey}</span>
-            <textarea rows={3} value={pair?.privateKey ?? ''} readOnly className="textarea" />
+            <input type="text" value={pair?.privateKey ?? ''} readOnly className="input" inputMode="text" spellCheck={false} />
             <CopyButton
               value={pair?.privateKey ?? ''}
               label={bundle.actions.copy}
@@ -134,7 +134,7 @@ export function KeyWorkbench() {
           </label>
           <label className="label">
             <span>{bundle.labels.publicKey}</span>
-            <textarea rows={3} value={pair?.publicKey ?? ''} readOnly className="textarea" />
+            <input type="text" value={pair?.publicKey ?? ''} readOnly className="input" inputMode="text" spellCheck={false} />
             <CopyButton
               value={pair?.publicKey ?? ''}
               label={bundle.actions.copy}
@@ -152,7 +152,7 @@ export function KeyWorkbench() {
           </button>
           <label className="label">
             <span>{bundle.labels.preSharedKey}</span>
-            <textarea rows={3} value={psk} readOnly className="textarea" />
+            <input type="text" value={psk} readOnly className="input" inputMode="text" spellCheck={false} />
             <CopyButton value={psk} label={bundle.actions.copy} copiedLabel={bundle.actions.copied} disabled={!psk} />
           </label>
         </div>
@@ -165,12 +165,16 @@ export function KeyWorkbench() {
         <div className="panel-body">
           <label className="label">
             <span>{bundle.labels.privateKey}</span>
-            <textarea
-              rows={5}
+            <input
+              type="text"
               value={manualPrivateKey}
               onChange={(event) => setManualPrivateKey(event.target.value)}
-              className="textarea"
-              placeholder="base64 private key"
+              className="input"
+              placeholder={bundle.placeholders.manualPrivateKey}
+              inputMode="text"
+              spellCheck={false}
+              maxLength={64}
+              autoComplete="off"
             />
           </label>
           <button type="button" onClick={handleDerivePublicKey} className="button button-subtle" disabled={busy}>
@@ -178,7 +182,7 @@ export function KeyWorkbench() {
           </button>
           <label className="label">
             <span>{bundle.labels.derivedPublicKey}</span>
-            <textarea rows={3} value={derivedPublicKey} readOnly className="textarea" />
+            <input type="text" value={derivedPublicKey} readOnly className="input" inputMode="text" spellCheck={false} />
             <CopyButton
               value={derivedPublicKey}
               label={bundle.actions.copy}

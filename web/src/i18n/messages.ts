@@ -8,6 +8,8 @@ interface MessageBlueprint {
     securityPill: string;
     conveniencePill: string;
     auditNote: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
   };
   actions: {
     generatePair: string;
@@ -24,6 +26,13 @@ interface MessageBlueprint {
     preSharedKey: string;
     derivedPublicKey: string;
     manualPrivateKey: string;
+  };
+  placeholders: {
+    manualPrivateKey: string;
+  };
+  generator: {
+    title: string;
+    lead: string;
   };
   notices: {
     offline: string;
@@ -46,6 +55,9 @@ interface MessageBlueprint {
     openSource: string;
     viewSource: string;
   };
+  sections: {
+    featuresTitle: string;
+  };
 }
 
 export const LOCALE_STORAGE_KEY = 'wgquick-locale';
@@ -54,11 +66,14 @@ export const messages: Record<Locale, MessageBlueprint> = {
   en: {
     localeName: 'English',
     hero: {
-      headline: 'WireGuard keys, generated locally.',
-      subheadline: 'wgquick.com keeps your key material on-device with hardened Go → WASM cryptography. No telemetry, no servers, no surprises.',
-      securityPill: 'Security: 100% local, auditable Go + WebAssembly',
-      conveniencePill: 'Convenience: zero installs, instant key pairs',
-      auditNote: 'Open source & reproducible builds — inspect everything before you trust it.',
+      headline: 'Secure WireGuard keys, ready in seconds.',
+      subheadline:
+        'wgquick.com runs Go-powered WebAssembly directly in your browser to create private, public, and pre-shared keys — auditable code, self-host friendly, and always offline.',
+      securityPill: 'Security · 100% local WebAssembly',
+      conveniencePill: 'Convenience · zero CLI required',
+      auditNote: 'Open source forever — fork, self-host, or inspect every line before you trust it.',
+      ctaPrimary: 'Launch key generator',
+      ctaSecondary: 'View the GitHub repo',
     },
     actions: {
       generatePair: 'Generate key pair',
@@ -75,6 +90,13 @@ export const messages: Record<Locale, MessageBlueprint> = {
       preSharedKey: 'Pre-shared key',
       derivedPublicKey: 'Derived public key',
       manualPrivateKey: 'Bring your own private key',
+    },
+    placeholders: {
+      manualPrivateKey: 'Base64 private key',
+    },
+    generator: {
+      title: 'Generate WireGuard keys without leaving your browser',
+      lead: 'Create fresh key pairs, prep pre-shared keys, or derive public keys from existing secrets — everything stays on-device.',
     },
     notices: {
       offline: 'All features run inside your browser. We never make network requests.',
@@ -94,18 +116,24 @@ export const messages: Record<Locale, MessageBlueprint> = {
       privateKeyRequired: 'Private key is required before deriving a public key.',
     },
     footer: {
-      openSource: 'Built for wgquick.com — MIT licensed & community friendly.',
-      viewSource: 'View source',
+      openSource: 'wgquick.com is MIT licensed, community maintained, and easy to deploy yourself.',
+      viewSource: 'Browse the GitHub repository',
+    },
+    sections: {
+      featuresTitle: 'Secure and convenient by design',
     },
   },
   zh: {
     localeName: '简体中文',
     hero: {
-      headline: 'WireGuard 密钥，本地即刻生成',
-      subheadline: 'wgquick.com 采用强化的 Go → WASM 加密模块，所有密钥仅在本地生成与处理，无遥测、无服务器。',
-      securityPill: '安全：100% 本地，可审计的 Go + WebAssembly',
-      conveniencePill: '高效：无需安装，瞬间生成密钥',
-      auditNote: '完全开源，可复现构建 — 相信之前先自我验证。',
+      headline: 'WireGuard 密钥，本地安全秒生成',
+      subheadline:
+        'wgquick.com 使用 Go 编译的 WebAssembly，在浏览器内立即生成私钥、公钥、预共享密钥；源码完全开源，也支持自行部署，全程离线。',
+      securityPill: '安全 · 100% 本地 WASM 执行',
+      conveniencePill: '便捷 · 无需命令行',
+      auditNote: 'MIT 许可开源项目 — 可自由审计、复现与自建。',
+      ctaPrimary: '启动密钥生成器',
+      ctaSecondary: '查看 GitHub 仓库',
     },
     actions: {
       generatePair: '生成密钥对',
@@ -122,6 +150,13 @@ export const messages: Record<Locale, MessageBlueprint> = {
       preSharedKey: '预共享密钥',
       derivedPublicKey: '推导出的公钥',
       manualPrivateKey: '使用自有私钥',
+    },
+    placeholders: {
+      manualPrivateKey: 'Base64 私钥',
+    },
+    generator: {
+      title: '无需离开浏览器，即刻生成 WireGuard 密钥',
+      lead: '快速生成成对密钥、预共享密钥，或从现有私钥推导公钥；所有操作仅在本地完成。',
     },
     notices: {
       offline: '所有功能均在浏览器内完成，我们不会发起任何网络请求。',
@@ -141,8 +176,11 @@ export const messages: Record<Locale, MessageBlueprint> = {
       privateKeyRequired: '推导公钥前请先输入有效的私钥。',
     },
     footer: {
-      openSource: '为 wgquick.com 打造 — MIT 许可，欢迎社区共建。',
-      viewSource: '查看源码',
+      openSource: 'wgquick.com 采用 MIT 许可，社区共建，也可按需自行部署。',
+      viewSource: '访问 GitHub 仓库',
+    },
+    sections: {
+      featuresTitle: '安全与便捷齐备的设计',
     },
   },
 };
