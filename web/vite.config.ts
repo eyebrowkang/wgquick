@@ -1,8 +1,14 @@
+import { createHash } from 'crypto';
 import { defineConfig, loadEnv, type Plugin, type PluginOption } from 'vite';
 import react from '@vitejs/plugin-react';
 
 function createAnalyticsPlugin(measurementId: string): Plugin {
   const scriptSources = ['https://www.googletagmanager.com', 'https://www.google-analytics.com'];
+  const inlineSnippet = `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${measurementId}', { anonymize_ip: true });`;
+  const inlineHash = createHash('sha256').update(inlineSnippet).digest('base64');
 
   const augmentCsp = (content: string) => {
     const directives = content
@@ -19,7 +25,7 @@ function createAnalyticsPlugin(measurementId: string): Plugin {
     const ensure = (name: string, values: string[]) => {
       const existing = map.get(name);
       if (!existing) {
-        map.set(name, values);
+        map.set(name, [...values]);
         return;
       }
       for (const value of values) {
@@ -29,7 +35,7 @@ function createAnalyticsPlugin(measurementId: string): Plugin {
       }
     };
 
-    ensure('script-src', scriptSources);
+    ensure('script-src', [...scriptSources, `'sha256-${inlineHash}'`]);
     ensure('connect-src', ['https://www.google-analytics.com']);
 
     const order = directives.map((directive) => directive.split(/\s+/)[0]);
@@ -48,16 +54,10 @@ function createAnalyticsPlugin(measurementId: string): Plugin {
     name: 'wgquick-analytics-injector',
     transformIndexHtml(html) {
       const cspRegex = /(http-equiv="Content-Security-Policy"[^>]*content=")(.*?)(")/i;
-      let updatedHtml = html;
-      updatedHtml = updatedHtml.replace(cspRegex, (_, prefix: string, content: string, suffix: string) => {
+      const updatedHtml = html.replace(cspRegex, (_, prefix: string, content: string, suffix: string) => {
         const nextContent = augmentCsp(content);
         return `${prefix}${nextContent}${suffix}`;
       });
-
-      const anonymizeSnippet = `window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${measurementId}', { anonymize_ip: true });`;
 
       return {
         html: updatedHtml,
@@ -72,7 +72,7 @@ gtag('config', '${measurementId}', { anonymize_ip: true });`;
           },
           {
             tag: 'script',
-            children: anonymizeSnippet,
+            children: inlineSnippet,
             injectTo: 'head',
           },
         ],
