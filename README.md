@@ -42,6 +42,7 @@ The combination of `GODEBUG=randautoseed=0`, `-trimpath`, `-buildvcs=false`, and
 ### Analytics configuration
 - Copy `web/.env.example` to `web/.env.local` (or set the variable in your deployment environment).
 - Set `VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX` to enable Google Analytics; leave it empty to disable analytics for private deployments.
+- The build injects the required GA `<script>` tags and expands the CSP automatically when a measurement ID is present.
 - When using the provided GitHub Actions workflow, create the `VITE_GA_MEASUREMENT_ID` repository secret so Cloudflare Pages builds include analytics.
   - If you need reproducible artifacts outside the workflow, remember to set `GODEBUG=randautoseed=0` when running `go build`.
 
