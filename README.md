@@ -18,10 +18,10 @@ A bilingual (English/简体中文) landing and utility site for wgquick.com that
    ```bash
    pnpm install --dir web
    ```
-2. **Build the Go → WASM binary**
+2. **Build the Go → WASM binary (reproducible output)**
    ```bash
    make wasm
-   # or: GOOS=js GOARCH=wasm go build -o web/public/main.wasm ./cmd/wasm
+   # or: GOOS=js GOARCH=wasm go build -trimpath -ldflags="-buildid=" -o web/public/main.wasm ./cmd/wasm
    ```
 3. **Run the development server**
    ```bash
@@ -35,6 +35,8 @@ A bilingual (English/简体中文) landing and utility site for wgquick.com that
 make build
 # outputs to web/dist with main.wasm + wasm_exec.js alongside the bundle
 ```
+
+The combination of `-trimpath` and `-ldflags="-buildid="` removes build metadata so identical sources produce identical `main.wasm` binaries.
 
 Deploy the contents of `web/dist` at https://wgquick.com/. The dist folder already includes `main.wasm` and `wasm_exec.js` under the same CSP rules.
 

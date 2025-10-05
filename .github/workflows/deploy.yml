@@ -37,7 +37,7 @@ jobs:
         run: pnpm install --dir web --frozen-lockfile
 
       - name: Build Go WebAssembly module
-        run: GOOS=js GOARCH=wasm go build -o web/public/main.wasm ./cmd/wasm
+        run: GOOS=js GOARCH=wasm go build -trimpath -ldflags="-buildid=" -o web/public/main.wasm ./cmd/wasm
 
       - name: Lint frontend
         run: pnpm --dir web run lint
