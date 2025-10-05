@@ -60,3 +60,7 @@ Deploy the contents of `web/dist` at https://wgquick.com/. The dist folder alrea
 - Add automated integrity checks (e.g., Service Worker verifying WASM hash)
 - Publish the site to the wgquick.com domain via a static host (Netlify, Cloudflare Pages, etc.)
 - Consider publishing reproducible build instructions or CI pipelines for transparency.
+
+## License
+- Code is released under the [MIT License](LICENSE) © 2025 eyebrowkang.
+- Website icons and branding assets are proprietary to eyebrowkang; please contact the author before reuse.
